@@ -394,10 +394,10 @@ window.addEventListener('DOMContentLoaded', function() {
     }
 
     next.addEventListener('click', () => {
-        if(offSet == +width.slice(0, width.length - 2) * (slides.length - 1)) {
+        if(offSet == cropLetter(width) * (slides.length - 1)) {
             offSet = 0;
         } else {
-            offSet += +width.slice(0, width.length - 2);
+            offSet += cropLetter(width);
         }
 
         slidesField.style.transform = `translateX(-${offSet}px)`;
@@ -415,9 +415,9 @@ window.addEventListener('DOMContentLoaded', function() {
 
     prev.addEventListener('click', () => {
         if(offSet == 0) {
-            offSet = +width.slice(0, width.length - 2) * (slides.length - 1);
+            offSet = cropLetter(width) * (slides.length - 1);
         } else {
-            offSet -= +width.slice(0, width.length - 2);
+            offSet -= cropLetter(width);
         }
 
         slidesField.style.transform = `translateX(-${offSet}px)`;
@@ -438,7 +438,7 @@ window.addEventListener('DOMContentLoaded', function() {
             const slideTo = e.target.getAttribute('data-slide-to');
 
             slideIndex = slideTo;
-            offSet = +width.slice(0, width.length - 2) * (slideTo - 1);
+            offSet = cropLetter(width) * (slideTo - 1);
 
             slidesField.style.transform = `translateX(-${offSet}px)`;
 
@@ -461,7 +461,9 @@ window.addEventListener('DOMContentLoaded', function() {
         dots[slideIndex - 1].style.opacity = 1;
     }
 
-
+    function cropLetter(n) {
+        return +n.replace(/\D/g, '');
+    }
 
 
 });
