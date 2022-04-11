@@ -1,44 +1,6 @@
 
 window.addEventListener('DOMContentLoaded', function() {
 
-    // Tabs
-    
-	let tabs = document.querySelectorAll('.tabheader__item'),
-		tabsContent = document.querySelectorAll('.tabcontent'),
-		tabsParent = document.querySelector('.tabheader__items');
-
-	function hideTabContent() {
-        
-        tabsContent.forEach(item => {
-            item.classList.add('hide');
-            item.classList.remove('show', 'fade');
-        });
-
-        tabs.forEach(item => {
-            item.classList.remove('tabheader__item_active');
-        });
-	}
-
-	function showTabContent(i = 0) {
-        tabsContent[i].classList.add('show', 'fade');
-        tabsContent[i].classList.remove('hide');
-        tabs[i].classList.add('tabheader__item_active');
-    }
-    
-    hideTabContent();
-    showTabContent();
-
-	tabsParent.addEventListener('click', function(event) {
-		const target = event.target;
-		if(target && target.classList.contains('tabheader__item')) {
-            tabs.forEach((item, i) => {
-                if (target == item) {
-                    hideTabContent();
-                    showTabContent(i);
-                }
-            });
-		}
-    });
     
     // Timer
 
@@ -140,91 +102,33 @@ window.addEventListener('DOMContentLoaded', function() {
 
     window.addEventListener('scroll', showModalByScroll);
 
-    // Используем классы для карточек
+    
 
-    // class MenuCard {
-    //     constructor(src, alt, title, descr, price, parentSelector, ...classes) {
-    //         this.src = src;
-    //         this.alt = alt;
-    //         this.title = title;
-    //         this.descr = descr;
-    //         this.price = price;
-    //         this.classes = classes;
-    //         this.parent = document.querySelector(parentSelector);
-    //         this.transfer = 27;
-    //         this.changeToUAH();
-    //     }
+    // getResource('http://localhost:3000/menu')
+    //     .then(data => createCard(data));
 
-    //     changeToUAH() {
-    //         this.price = this.price * this.transfer;
-    //     }
-
-    //     render() {
-    //         const element = document.createElement('div');
+    // function createCard(data) {
+    //     data.forEach(({img, altimg, title, descr, price}) => {
             
-    //         if (this.classes.length === 0) {
-    //             this.classes = "menu__item";
-    //             element.classList.add(this.classes);
-    //         } else {
-    //             this.classes.forEach(className => element.classList.add(className));
-    //         }
-            
+    //         const element =   document.createElement('div');
+
+    //         element.classList.add('menu__item');
+
     //         element.innerHTML = `
-    //             <img src=${this.src} alt=${this.alt}>
-    //             <h3 class="menu__item-subtitle">${this.title}</h3>
-    //             <div class="menu__item-descr">${this.descr}</div>
+    //             <img src=${img} alt=${altimg}>
+    //             <h3 class="menu__item-subtitle">${title}</h3>
+    //             <div class="menu__item-descr">${descr}</div>
     //             <div class="menu__item-divider"></div>
     //             <div class="menu__item-price">
     //                 <div class="menu__item-cost">Цена:</div>
-    //                 <div class="menu__item-total"><span>${this.price}</span> грн/день</div>
+    //                 <div class="menu__item-total"><span>${price}</span> грн/день</div>
     //             </div>
     //         `;
-    //         this.parent.append(element);
-    //     }
-    // }
 
-    const getResource = async (url) => {
-        const res = await fetch(url);
+    //         document.querySelector('.menu .container').append(element);
 
-        if (!res.ok) {
-            throw new Error(`Could not fetch ${url}, status:${res.status}`);
-        }
-
-        return await res.json();
-    };
-
-    // getResource('http://localhost:3000/menu')
-    // .then(data => {
-    //     data.forEach(({img, altimg, title, descr, price}) => {
-    //         new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
     //     });
-    // });
-
-    getResource('http://localhost:3000/menu')
-        .then(data => createCard(data));
-
-    function createCard(data) {
-        data.forEach(({img, altimg, title, descr, price}) => {
-            
-            const element =   document.createElement('div');
-
-            element.classList.add('menu__item');
-
-            element.innerHTML = `
-                <img src=${img} alt=${altimg}>
-                <h3 class="menu__item-subtitle">${title}</h3>
-                <div class="menu__item-descr">${descr}</div>
-                <div class="menu__item-divider"></div>
-                <div class="menu__item-price">
-                    <div class="menu__item-cost">Цена:</div>
-                    <div class="menu__item-total"><span>${price}</span> грн/день</div>
-                </div>
-            `;
-
-            document.querySelector('.menu .container').append(element);
-
-        });
-    }
+    // }
 
     // axios.get('http://localhost:3000/menu')
     //     .then(data => {
